@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Inventory Management App</h1>
+    <h1>Inventory Management App Dashboard</h1>
 </body>
 </html>
