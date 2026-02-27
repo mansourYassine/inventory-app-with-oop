@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
+use App\Controllers\CategoryController;
 use App\Controllers\HomeController;
+use App\Controllers\ProductController;
+use App\Controllers\StockMovementController;
+use App\Controllers\SupplierController;
 use App\Exceptions\RouteNotFoundException;
 use App\View;
 use App\Router;
@@ -19,7 +23,11 @@ define('VIEWS_PATH', __DIR__ . '/../views/');
 
 $router = new Router();
 
-$router->get('/', [HomeController::class, "index"]);
+$router->get('/', [HomeController::class, 'index'])
+    ->get('/products', [ProductController::class, 'index'])
+    ->get('/categories', [CategoryController::class, 'index'])
+    ->get('/suppliers', [SupplierController::class, 'index'])
+    ->get('/stock-movements', [StockMovementController::class, 'index']);
 
 try {
     echo $router->resolve($_SERVER["REQUEST_URI"], strtolower($_SERVER["REQUEST_METHOD"]));
