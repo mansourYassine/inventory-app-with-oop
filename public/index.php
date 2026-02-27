@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
+use App\App;
+use App\Config;
 use App\Controllers\CategoryController;
 use App\Controllers\HomeController;
 use App\Controllers\ProductController;
 use App\Controllers\StockMovementController;
 use App\Controllers\SupplierController;
-use App\Exceptions\RouteNotFoundException;
-use App\View;
 use App\Router;
 
 require __DIR__ . "/../vendor/autoload.php";
@@ -29,10 +29,8 @@ $router->get('/', [HomeController::class, 'index'])
     ->get('/suppliers', [SupplierController::class, 'index'])
     ->get('/stock-movements', [StockMovementController::class, 'index']);
 
-try {
-    echo $router->resolve($_SERVER["REQUEST_URI"], strtolower($_SERVER["REQUEST_METHOD"]));
-} catch (RouteNotFoundException) {
-    header('HTTP/1.1 404 Not Found');
-    // http_response_code(404);
-    echo View::make('errors/404');
-}
+(new App(
+    $router, 
+    ['uri' => $_SERVER["REQUEST_URI"], 'method' => $_SERVER["REQUEST_METHOD"]],
+    new Config($_ENV)
+))->run();
