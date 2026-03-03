@@ -25,6 +25,8 @@ $router = new Router();
 
 $router->get('/', [HomeController::class, 'index'])
     ->get('/products', [ProductController::class, 'index'])
+    ->get('/products/add', [ProductController::class, 'add'])
+    ->post('/products/add', [ProductController::class, 'store'])
     ->get('/categories', [CategoryController::class, 'index'])
     ->get('/suppliers', [SupplierController::class, 'index'])
     ->get('/stock-movements', [StockMovementController::class, 'index']);

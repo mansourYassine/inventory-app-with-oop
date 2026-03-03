@@ -23,4 +23,18 @@ class Product extends Model
         $products = $stmt->fetchAll();
         return $products;
     }
+
+    public function create(string $productName, int $categoryId, int $supplierId, int $quantity, float $price)
+    {
+        $query = 'INSERT INTO products (product_name, category_id, supplier_id, product_quantity, product_price)
+                VALUES (:product_name, :category_id, :supplier_id, :product_quantity, :product_price)';
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            'product_name' => $productName,
+            'category_id' => $categoryId,
+            'supplier_id' => $supplierId,
+            'product_quantity' => $quantity,
+            'product_price' => $price,
+        ]);
+    }
 }

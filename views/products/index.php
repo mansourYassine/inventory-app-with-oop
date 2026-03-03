@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>Products Page</h1>
+    <a href="/products/add">Add New Product</a>
     <table border="1">
         <?php foreach ($allProducts as $product):?>
             <?php if (strcmp($product['is_active'], 'YES') === 0):?>
