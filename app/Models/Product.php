@@ -37,4 +37,21 @@ class Product extends Model
             'product_price' => $price,
         ]);
     }
+
+    public function getProductInfo(int $productId)
+    {
+        $query = "
+            SELECT p.product_id, p.product_name, c.category_name, c.category_id, s.supplier_name, s.supplier_id, p.product_quantity, p.product_price
+            FROM products p
+            JOIN categories c
+                ON p.category_id = c.category_id
+            JOIN suppliers s
+                ON p.supplier_id = s.supplier_id
+            WHERE p.product_id = ?;
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$productId]);
+        $productInfo = $stmt->fetch();
+        return $productInfo;
+    }
 }

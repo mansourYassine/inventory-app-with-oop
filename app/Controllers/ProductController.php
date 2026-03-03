@@ -30,7 +30,7 @@ class ProductController
     public function store()
     {
         $product = new Product();
-        
+
         // Check if product name doesn't exist
         $allProducts = $product->getAllProducts();
         $productsName = array_map(function ($product) {
@@ -55,5 +55,15 @@ class ProductController
 
         header('Location: /products');
         exit();
+    }
+
+    public function showInfo(): View
+    {
+        $product = new Product();
+
+        $productId = intval($_POST['product_id']);
+        $productInfo = $product->getProductInfo($productId);
+
+        return View::make('products/info', ['productInfo' => $productInfo]);
     }
 }
