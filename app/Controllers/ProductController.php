@@ -77,4 +77,30 @@ class ProductController
         header('Location: /products');
         exit();
     }
+
+    public function edit(): View
+    {
+        $productIdToEdit = intval($_POST['edit_product_id']);
+        $productInfo = $this->product->find($productIdToEdit);
+        $allCategories = $this->category->getAll();
+        $allSuppliers = $this->supplier->getAll();
+        return View::make('products/edit', [
+            'productInfo' => $productInfo, 
+            'allCategories' => $allCategories, 
+            'allSuppliers' => $allSuppliers
+        ]);
+    }
+
+    public function update()
+    {
+        $productId = intval($_POST['product_id']);
+        $productName = $_POST['product_name'];
+        $categoryId = intval($_POST['category_id']);
+        $supplierId = intval($_POST['supplier_id']);
+        $productQuantity = intval($_POST['product_quantity']);
+        $productPrice = floatval($_POST['product_price']);
+        $this->product->edit($productId, $productName, $categoryId, $supplierId, $productQuantity, $productPrice);
+        header('Location: /products');
+        exit();
+    }
 }

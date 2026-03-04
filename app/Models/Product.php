@@ -65,4 +65,33 @@ class Product extends Model
         $stmt = $this->db->prepare($query);
         $stmt->execute([$productId]);
     }
+
+    public function edit(
+        int $productId,
+        string $productName,
+        int $categoryId,
+        int $supplierId,
+        int $productQuantity,
+        float $productPrice
+    ) {
+        $query = "
+            UPDATE products
+            SET 
+                product_name = :product_name, 
+                category_id = :category_id, 
+                supplier_id = :supplier_id, 
+                product_quantity = :product_quantity, 
+                product_price = :product_price
+            WHERE product_id = :product_id;
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            'product_id'=> $productId,
+            'product_name' => $productName,
+            'category_id' => $categoryId,
+            'supplier_id' => $supplierId,
+            'product_quantity' => $productQuantity,
+            'product_price' => $productPrice            
+        ]);
+    }
 }

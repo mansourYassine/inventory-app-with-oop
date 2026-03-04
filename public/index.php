@@ -29,6 +29,8 @@ $router->get('/', [HomeController::class, 'index'])
     ->post('/products/add', [ProductController::class, 'store'])
     ->post('/products/info', [ProductController::class, 'showInfo'])
     ->post('/products/delete', [ProductController::class, 'remove'])
+    ->post('/products/edit', [ProductController::class, 'edit'])
+    ->post('/products/edit/save', [ProductController::class, 'update'])
     ->get('/categories', [CategoryController::class, 'index'])
     ->get('/suppliers', [SupplierController::class, 'index'])
     ->get('/stock-movements', [StockMovementController::class, 'index']);
