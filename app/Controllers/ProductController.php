@@ -29,8 +29,8 @@ class ProductController
 
     public function add(): View
     {
-        $allSuppliers = $this->supplier->getAllSuppliers();
-        $allCategories = $this->category->getAllCategories();
+        $allSuppliers = $this->supplier->getAll();
+        $allCategories = $this->category->getAll();
         return View::make('products/add', ['allSuppliers' => $allSuppliers, 'allCategories' => $allCategories]);
     }
 
@@ -42,8 +42,8 @@ class ProductController
             return $product['product_name'];
         }, $allProducts);
         $productName = "";
-        for ($i=0; $i < count($productsName); $i++) { 
-            if (strcmp(strtolower($_POST['product_name']),strtolower($productsName[$i]))) {
+        for ($i = 0; $i < count($productsName); $i++) {
+            if (strcmp(strtolower($_POST['product_name']), strtolower($productsName[$i]))) {
                 $productName = $_POST['product_name'];
             } else {
                 echo ('<h1>Product name already existed</h1>');

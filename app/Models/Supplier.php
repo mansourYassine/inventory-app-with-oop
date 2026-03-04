@@ -8,7 +8,7 @@ use App\Model;
 
 class Supplier extends Model
 {
-    public function getAllSuppliers()
+    public function getAll()
     {
         $query = "
             SELECT * FROM suppliers

@@ -8,7 +8,7 @@ use App\Model;
 
 class Category extends Model
 {
-    public function getAllCategories()
+    public function getAll()
     {
         $query = "
             SELECT * FROM categories
