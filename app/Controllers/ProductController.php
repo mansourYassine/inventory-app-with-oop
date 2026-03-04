@@ -23,7 +23,7 @@ class ProductController
 
     public function index(): View
     {
-        $allProducts = $this->product->getAllProducts();
+        $allProducts = $this->product->getAll();
         return View::make('products/index', ['allProducts' => $allProducts]);
     }
 
@@ -37,7 +37,7 @@ class ProductController
     public function store()
     {
         // Check if product name doesn't exist
-        $allProducts = $this->product->getAllProducts();
+        $allProducts = $this->product->getAll();
         $productsName = array_map(function ($product) {
             return $product['product_name'];
         }, $allProducts);
@@ -65,7 +65,7 @@ class ProductController
     public function showInfo(): View
     {
         $productId = intval($_POST['product_id']);
-        $productInfo = $this->product->getProductInfo($productId);
+        $productInfo = $this->product->find($productId);
 
         return View::make('products/info', ['productInfo' => $productInfo]);
     }

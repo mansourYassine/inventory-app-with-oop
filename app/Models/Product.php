@@ -8,7 +8,7 @@ use App\Model;
 
 class Product extends Model
 {
-    public function getAllProducts()
+    public function getAll()
     {
         $query = '
         SELECT p.product_id, p.product_name, c.category_id, c.category_name, s.supplier_id, s.supplier_name, p.product_quantity, p.product_price, p.is_active
@@ -38,7 +38,7 @@ class Product extends Model
         ]);
     }
 
-    public function getProductInfo(int $productId)
+    public function find(int $productId)
     {
         $query = "
             SELECT p.product_id, p.product_name, c.category_name, c.category_id, s.supplier_name, s.supplier_id, p.product_quantity, p.product_price
