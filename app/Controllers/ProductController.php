@@ -11,28 +11,33 @@ use App\View;
 
 class ProductController
 {
+    private Product $product;
+    private Supplier $supplier;
+    private Category $category;
+    public function __construct()
+    {
+        $this->product = new Product();
+        $this->supplier = new Supplier();
+        $this->category = new Category();
+    }
+
     public function index(): View
     {
-        $product = new Product();
-        $allProducts = $product->getAllProducts();
+        $allProducts = $this->product->getAllProducts();
         return View::make('products/index', ['allProducts' => $allProducts]);
     }
 
     public function add(): View
     {
-        $supplier = new Supplier();
-        $allSuppliers = $supplier->getAllSuppliers();
-        $category = new Category();
-        $allCategories = $category->getAllCategories();
+        $allSuppliers = $this->supplier->getAllSuppliers();
+        $allCategories = $this->category->getAllCategories();
         return View::make('products/add', ['allSuppliers' => $allSuppliers, 'allCategories' => $allCategories]);
     }
 
     public function store()
     {
-        $product = new Product();
-
         // Check if product name doesn't exist
-        $allProducts = $product->getAllProducts();
+        $allProducts = $this->product->getAllProducts();
         $productsName = array_map(function ($product) {
             return $product['product_name'];
         }, $allProducts);
@@ -51,7 +56,7 @@ class ProductController
         $productQuantity = intval($_POST['product_quantity']);
         $productPrice = floatval($_POST['product_price']);
 
-        $product->create($productName, $categoryId, $supplierId, $productQuantity, $productPrice);
+        $this->product->create($productName, $categoryId, $supplierId, $productQuantity, $productPrice);
 
         header('Location: /products');
         exit();
@@ -59,10 +64,8 @@ class ProductController
 
     public function showInfo(): View
     {
-        $product = new Product();
-
         $productId = intval($_POST['product_id']);
-        $productInfo = $product->getProductInfo($productId);
+        $productInfo = $this->product->getProductInfo($productId);
 
         return View::make('products/info', ['productInfo' => $productInfo]);
     }
