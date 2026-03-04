@@ -54,4 +54,15 @@ class Product extends Model
         $productInfo = $stmt->fetch();
         return $productInfo;
     }
+
+    public function delete(int $productId)
+    {
+        $query = "
+            UPDATE products
+            SET is_active = 'NO'
+            WHERE product_id = ?;
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$productId]);
+    }
 }

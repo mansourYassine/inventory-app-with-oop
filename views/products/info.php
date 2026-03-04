@@ -18,7 +18,7 @@
             <input type="hidden" name="edit_product_id" value="<?= $productInfo['product_id'] ?>">
             <button type="submit">Edit</button>
         </form>
-        <form action="/products/info" method="post">
+        <form action="/products/delete" method="post">
             <input type="hidden" name="delete_product_id" value="<?= $productInfo['product_id'] ?>">
             <button type="submit">delete</button>
         </form>

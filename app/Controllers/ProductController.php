@@ -69,4 +69,12 @@ class ProductController
 
         return View::make('products/info', ['productInfo' => $productInfo]);
     }
+
+    public function remove()
+    {
+        $productIdToDelete = intval($_POST['delete_product_id']);
+        $this->product->delete($productIdToDelete);
+        header('Location: /products');
+        exit();
+    }
 }
