@@ -24,7 +24,11 @@ class ProductController
     public function index(): View
     {
         $allProducts = $this->product->getAll();
-        return View::make('products/index', ['allProducts' => $allProducts]);
+        $jsonProducts = json_encode($this->product->getAll());
+
+        $allSuppliers = $this->supplier->getAll();
+        $allCategories = $this->category->getAll();
+        return View::make('products/index', ['allProducts' => $allProducts, 'allSuppliers' => $allSuppliers, 'allCategories' => $allCategories, 'jsonProducts' => $jsonProducts]);
     }
 
     public function add(): View
