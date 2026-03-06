@@ -4,23 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\Supplier;
 use App\View;
 
-class ProductController
+class ProductController extends BaseController
 {
-    private Product $product;
-    private Supplier $supplier;
-    private Category $category;
-    public function __construct()
-    {
-        $this->product = new Product();
-        $this->supplier = new Supplier();
-        $this->category = new Category();
-    }
-
     public function index(): View
     {
         $allProducts = $this->product->getAll();
