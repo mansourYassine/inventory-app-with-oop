@@ -6,10 +6,35 @@ namespace App\Controllers;
 
 use App\View;
 
-class CategoryController
+class CategoryController extends BaseController
 {
     public function index(): View
     {
         return View::make('categories/index');
     }
+
+    public function add(): View {
+
+    }
+
+    public function store() {
+
+    }
+
+    public function showInfo(): View {
+
+    }
+
+    public function remove() {
+
+    }
+
+    public function edit(): View {
+
+    }
+    
+    public function update() {
+
+    }
+
 }
