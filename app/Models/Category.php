@@ -19,4 +19,12 @@ class Category extends Model
         $allCategories = $stmt->fetchAll();
         return $allCategories;
     }
+
+    public function create(string $categoryName)
+    {
+        $query = "INSERT INTO categories (category_name)
+                VALUES (?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$categoryName]);
+    }
 }
