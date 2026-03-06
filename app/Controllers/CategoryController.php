@@ -10,7 +10,8 @@ class CategoryController extends BaseController
 {
     public function index(): View
     {
-        return View::make('categories/index');
+        $allCategories = $this->category->getAll();
+        return View::make('categories/index', ['categories' => $allCategories]);
     }
 
     public function add(): View {
