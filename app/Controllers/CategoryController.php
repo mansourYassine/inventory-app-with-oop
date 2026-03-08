@@ -40,11 +40,16 @@ class CategoryController extends BaseController
     }
 
     public function showInfo(): View {
-
+        $categoryId = intval($_POST['category_id']);
+        $categoryInfo = $this->category->find($categoryId);
+        return View::make('categories/info', ['categoryInfo' => $categoryInfo]);
     }
 
     public function remove() {
-
+        $categoryId = intval($_POST['delete_category_id']);
+        $this->category->delete($categoryId);
+        header('Location: /categories');
+        exit();
     }
 
     public function edit(): View {
