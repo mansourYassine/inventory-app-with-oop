@@ -12,7 +12,6 @@ class Category extends Model
     {
         $query = "
             SELECT * FROM categories
-            WHERE is_categ_active = 'YES'
         ";
         $stmt = $this->db->prepare($query);
         $stmt->execute();

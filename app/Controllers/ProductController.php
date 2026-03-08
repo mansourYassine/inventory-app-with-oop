@@ -28,18 +28,24 @@ class ProductController extends BaseController
     public function store()
     {
         // Check if product name doesn't exist
-        $allProducts = $this->product->getAll();
-        $productsName = array_map(function ($product) {
+        $products = $this->product->getAll();
+        $productsNames = array_map(function ($product) {
             return $product['product_name'];
-        }, $allProducts);
-        $productName = "";
-        for ($i = 0; $i < count($productsName); $i++) {
-            if (strcmp(strtolower($_POST['product_name']), strtolower($productsName[$i]))) {
-                $productName = $_POST['product_name'];
-            } else {
-                echo ('<h1>Product name already existed</h1>');
-                die;
+        }, $products);
+
+        $isProductExist = false;
+        foreach ($productsNames as $productName) {
+            if (strcmp(strtolower($_POST['product_name']),strtolower($productName)) === 0) {
+                $isProductExist = true;
             }
+        }
+
+        $productName = "";
+        if ($isProductExist === false) {
+            $productName = $_POST['product_name'];
+        } else {
+            echo ('<h1>Product name already existed</h1>');
+            die;
         }
 
         $categoryId = intval($_POST['category_id']);
