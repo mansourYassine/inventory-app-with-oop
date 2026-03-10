@@ -59,11 +59,16 @@ class CategoryController extends BaseController
     }
 
     public function edit(): View {
-
+        $categoryIdToEdit = intval($_POST['edit_category_id']);
+        $categoryInfo = $this->category->find($categoryIdToEdit);
+        return View::make('categories/edit', ['categoryInfo' => $categoryInfo]);
     }
 
     public function update() {
-
+        $categoryId = intval($_POST['category_id']);
+        $categoryName = $_POST['category_name'];
+        $this->category->edit($categoryId, $categoryName);
+        header('Location: /categories');
+        exit();
     }
-
 }

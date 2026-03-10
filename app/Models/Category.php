@@ -50,4 +50,17 @@ class Category extends Model
         $stmt = $this->db->prepare($query);
         $stmt->execute([$categoryId]);
     }
+
+    public function edit(int $categoryId, string $categoryName) {
+        $query = "
+                UPDATE categories
+                SET category_name = :category_name
+                WHERE category_id = :category_id;
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            ':category_id' => $categoryId,
+            ':category_name' => $categoryName       
+        ]);
+    }
 }
