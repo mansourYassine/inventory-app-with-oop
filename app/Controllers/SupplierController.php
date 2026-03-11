@@ -10,7 +10,8 @@ class SupplierController extends BaseController
 {
     public function index(): View
     {
-        return View::make('suppliers/index');
+        $suppliers = $this->supplier->getAll();
+        return View::make('suppliers/index', ['suppliers' => $suppliers]);
     }
 
     public function add(): View {
