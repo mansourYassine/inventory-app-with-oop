@@ -17,8 +17,7 @@ class SupplierController extends BaseController
 
     public function index(): View
     {
-        $suppliers = $this->suppliers;
-        return View::make('suppliers/index', ['suppliers' => $suppliers]);
+        return View::make('suppliers/index', ['suppliers' => $this->suppliers]);
     }
 
     public function add(): View {
@@ -57,7 +56,9 @@ class SupplierController extends BaseController
     }
 
     public function showInfo(): View {
-        return View::make('');
+        $supplierId = intval($_POST['supplier_id']);
+        $supplierInfo = $this->supplier->find($supplierId);
+        return View::make('suppliers/info', ['supplierInfo' => $supplierInfo]);
     }
 
     public function remove() {

@@ -43,6 +43,9 @@ $router->get('/', [HomeController::class, 'index'])
     ->get('/suppliers', [SupplierController::class, 'index'])
     ->get('/suppliers/add', [SupplierController::class, 'add'])
     ->post('/suppliers/add', [SupplierController::class, 'store'])
+    ->post('/suppliers/info', [SupplierController::class, 'showInfo'])
+    ->post('/suppliers/delete', [SupplierController::class, 'remove'])
+
     ->get('/stock-movements', [StockMovementController::class, 'index']);
 
 (new App(

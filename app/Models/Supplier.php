@@ -34,4 +34,17 @@ class Supplier extends Model
             ':supplier_address' => $supplierAddress
         ]);
     }
+
+    public function find(int $supplierId)
+    {
+        $query = "
+            SELECT supplier_id, supplier_name, supplier_email, supplier_phone, supplier_address
+            FROM suppliers
+            WHERE supplier_id = ?;
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$supplierId]);
+        $supplierInfo = $stmt->fetch();
+        return $supplierInfo;
+    }
 }
