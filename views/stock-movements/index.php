@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Stock Movements Page</h1>
-    <a href="/stock_movements/add">Add New Stock Movement</a>
+    <a href="/stock-movements/add">Add New Stock Movement</a>
     <table border="1">
         <tr>
             <th>Product Name</th>
@@ -23,7 +23,7 @@
                 <td><?= $stockMovement['movement_quantity'] ?></td>
                 <td><?= $stockMovement['movement_date'] ?></td>
                 <td>
-                    <form action="/stock_movements/info" method="post">
+                    <form action="/stock-movements/info" method="post">
                         <input type="hidden" name="stock_movement_id" value="<?= $stockMovement['stock_movement_id'] ?>">
                         <button type="submit">More Info</button>
                     </form>
