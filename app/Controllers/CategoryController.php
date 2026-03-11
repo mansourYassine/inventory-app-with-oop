@@ -8,10 +8,16 @@ use App\View;
 
 class CategoryController extends BaseController
 {
+    private array $categories;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->categories = $this->category->getAll();
+    }
+
     public function index(): View
     {
-        $allCategories = $this->category->getAll();
-        return View::make('categories/index', ['categories' => $allCategories]);
+        return View::make('categories/index', ['categories' => $this->categories]);
     }
 
     public function add(): View {
@@ -20,10 +26,9 @@ class CategoryController extends BaseController
 
     public function store() {
         // Check if category name doesn't already exist
-        $categories = $this->category->getAll();
         $categoriesNames = array_map(function ($category) {
             return $category['category_name'];
-        }, $categories);
+        }, $this->categories);
         
         $isCategoryExist = false;
         foreach ($categoriesNames as $categoryName) {
