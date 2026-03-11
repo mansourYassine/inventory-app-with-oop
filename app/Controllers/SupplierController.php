@@ -69,10 +69,23 @@ class SupplierController extends BaseController
     }
 
     public function edit(): View {
-        return View::make('');
+        $supplierIdToEdit = intval($_POST['edit_supplier_id']);
+        $supplierInfo = $this->supplier->find($supplierIdToEdit);
+        return View::make('suppliers/edit', ['supplierInfo' => $supplierInfo]);
     }
 
     public function update() {
-
+        $supplierId = intval($_POST['supplier_id']);
+        $supplierName = $_POST['supplier_name'];
+        $supplierEmail = $_POST['supplier_email'];
+        $supplierPhone = $_POST['supplier_phone'];
+        $supplierAddress = $_POST['supplier_address'];
+        $this->supplier->edit($supplierId, 
+                        $supplierName, 
+                        $supplierEmail, 
+                        $supplierPhone, 
+                        $supplierAddress);
+        header('Location: /suppliers');
+        exit();
     }
 }

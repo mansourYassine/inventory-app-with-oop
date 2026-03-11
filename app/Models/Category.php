@@ -51,7 +51,8 @@ class Category extends Model
         $stmt->execute([$categoryId]);
     }
 
-    public function edit(int $categoryId, string $categoryName) {
+    public function edit(int $categoryId, string $categoryName) 
+    {
         $query = "
                 UPDATE categories
                 SET category_name = :category_name

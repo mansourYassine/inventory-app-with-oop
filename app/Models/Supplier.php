@@ -58,4 +58,29 @@ class Supplier extends Model
         $stmt = $this->db->prepare($query);
         $stmt->execute([$supplierId]);
     }
+
+    public function edit(int $supplierId, 
+                        string $supplierName, 
+                        string $supplierEmail, 
+                        string $supplierPhone, 
+                        string $supplierAddress) 
+    {
+        $query = "
+            UPDATE suppliers
+            SET 
+                supplier_name = :supplier_name,
+                supplier_email = :supplier_email,
+                supplier_phone = :supplier_phone,
+                supplier_address = :supplier_address
+            WHERE supplier_id = :supplier_id;
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            ':supplier_id' => $supplierId,
+            ':supplier_name' => $supplierName,
+            ':supplier_email' => $supplierEmail,
+            ':supplier_phone' => $supplierPhone,
+            ':supplier_address' => $supplierAddress
+        ]);
+    }
 }
