@@ -31,6 +31,7 @@ $router->get('/', [HomeController::class, 'index'])
     ->post('/products/delete', [ProductController::class, 'remove'])
     ->post('/products/edit', [ProductController::class, 'edit'])
     ->post('/products/edit/save', [ProductController::class, 'update'])
+
     ->get('/categories', [CategoryController::class, 'index'])
     ->get('/categories/add', [CategoryController::class, 'add'])
     ->post('/categories/add', [CategoryController::class, 'store'])
@@ -38,7 +39,10 @@ $router->get('/', [HomeController::class, 'index'])
     ->post('/categories/delete', [CategoryController::class, 'remove'])
     ->post('/categories/edit', [CategoryController::class, 'edit'])
     ->post('/categories/edit/save', [CategoryController::class, 'update'])
+
     ->get('/suppliers', [SupplierController::class, 'index'])
+    ->get('/suppliers/add', [SupplierController::class, 'add'])
+    ->post('/suppliers/add', [SupplierController::class, 'store'])
     ->get('/stock-movements', [StockMovementController::class, 'index']);
 
 (new App(

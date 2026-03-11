@@ -17,16 +17,43 @@ class SupplierController extends BaseController
 
     public function index(): View
     {
-        $suppliers = $this->supplier->getAll();
+        $suppliers = $this->suppliers;
         return View::make('suppliers/index', ['suppliers' => $suppliers]);
     }
 
     public function add(): View {
-        return View::make('');
+        return View::make('suppliers/add');
     }
 
     public function store() {
+        // Prepare supplier's data to store it
 
+        // Check if product name doesn't already exist
+        $suppliersNames = array_map(function ($supplier) {
+            return $supplier['supplier_name'];
+        }, $this->suppliers);
+        $isSupplierExist = false;
+        foreach ($suppliersNames as $supplierName) {
+            if (strcmp(strtolower($_POST['supplier_name']), strtolower($supplierName)) === 0) {
+                $isSupplierExist = true;
+            }
+        }
+        $supplierName = "";
+        if ($isSupplierExist === false) {
+            $supplierName = $_POST['supplier_name'];
+        } else {
+            echo ('<h1>Supplier name already existed</h1>');
+            die;
+        }
+
+        $supplierEmail = $_POST['supplier_email'];
+        $supplierPhone = $_POST['supplier_phone'];
+        $supplierAddress = $_POST['supplier_address'];
+
+        $this->supplier->create($supplierName, $supplierEmail, $supplierPhone, $supplierAddress);
+
+        header('Location: /suppliers');
+        exit();
     }
 
     public function showInfo(): View {

@@ -19,4 +19,19 @@ class Supplier extends Model
         $allSuppliers = $stmt->fetchAll();
         return $allSuppliers;
     }
+
+    public function create(string $supplierName, string $supplierEmail, string $supplierPhone, string $supplierAddress) 
+    {
+        $query = "
+            INSERT INTO suppliers (supplier_name, supplier_email, supplier_phone, supplier_address)
+            VALUES (:supplier_name, :supplier_email, :supplier_phone, :supplier_address);
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            ':supplier_name' => $supplierName,
+            ':supplier_email' => $supplierEmail,
+            ':supplier_phone' => $supplierPhone,
+            ':supplier_address' => $supplierAddress
+        ]);
+    }
 }
