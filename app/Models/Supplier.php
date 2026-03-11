@@ -47,4 +47,15 @@ class Supplier extends Model
         $supplierInfo = $stmt->fetch();
         return $supplierInfo;
     }
+
+    public function delete(int $supplierId)
+    {
+        $query = "
+            UPDATE suppliers
+            SET is_supp_active = 'NO'
+            WHERE supplier_id = ?;
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$supplierId]);
+    }
 }

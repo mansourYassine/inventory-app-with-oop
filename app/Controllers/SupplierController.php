@@ -62,7 +62,10 @@ class SupplierController extends BaseController
     }
 
     public function remove() {
-
+        $supplierId = intval($_POST['delete_supplier_id']);
+        $this->supplier->delete($supplierId);
+        header('Location: /suppliers');
+        exit();
     }
 
     public function edit(): View {
