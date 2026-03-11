@@ -8,30 +8,38 @@ use App\View;
 
 class ProductController extends BaseController
 {
+    private array $products;
+    private array $categories;
+    private array $suppliers;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->products = $this->product->getAll();
+        $this->categories = $this->category->getAll();
+        $this->suppliers = $this->supplier->getAll();
+    }
+
     public function index(): View
     {
-        $allProducts = $this->product->getAll();
-        $jsonProducts = json_encode($this->product->getAll());
-
-        $allSuppliers = $this->supplier->getAll();
-        $allCategories = $this->category->getAll();
-        return View::make('products/index', ['allProducts' => $allProducts, 'allSuppliers' => $allSuppliers, 'allCategories' => $allCategories, 'jsonProducts' => $jsonProducts]);
+        $jsonProducts = json_encode($this->products);
+        return View::make('products/index', 
+            ['allProducts' => $this->products, 
+            'allSuppliers' => $this->suppliers, 
+            'allCategories' => $this->categories, 
+            'jsonProducts' => $jsonProducts]);
     }
 
     public function add(): View
     {
-        $allSuppliers = $this->supplier->getAll();
-        $allCategories = $this->category->getAll();
-        return View::make('products/add', ['allSuppliers' => $allSuppliers, 'allCategories' => $allCategories]);
+        return View::make('products/add', ['allSuppliers' => $this->suppliers, 'allCategories' => $this->categories]);
     }
 
     public function store()
     {
         // Check if product name doesn't exist
-        $products = $this->product->getAll();
         $productsNames = array_map(function ($product) {
             return $product['product_name'];
-        }, $products);
+        }, $this->products);
 
         $isProductExist = false;
         foreach ($productsNames as $productName) {
@@ -79,12 +87,10 @@ class ProductController extends BaseController
     {
         $productIdToEdit = intval($_POST['edit_product_id']);
         $productInfo = $this->product->find($productIdToEdit);
-        $allCategories = $this->category->getAll();
-        $allSuppliers = $this->supplier->getAll();
         return View::make('products/edit', [
             'productInfo' => $productInfo, 
-            'allCategories' => $allCategories, 
-            'allSuppliers' => $allSuppliers
+            'allCategories' => $this->categories, 
+            'allSuppliers' => $this->suppliers
         ]);
     }
 
