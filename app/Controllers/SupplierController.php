@@ -8,6 +8,13 @@ use App\View;
 
 class SupplierController extends BaseController
 {
+    private array $suppliers;
+    public function __construct()
+    {
+        parent::__construct();
+        $this->suppliers = $this->supplier->getAll();
+    }
+
     public function index(): View
     {
         $suppliers = $this->supplier->getAll();
