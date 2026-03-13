@@ -73,4 +73,64 @@ class StockMovement extends Model
             exit();
         }
     }
+
+    public function find(int $stockMovementId)
+    {
+        $query = "
+            SELECT 
+                s.stock_movement_id, 
+                s.product_id, 
+                p.product_name, 
+                s.movement_quantity, 
+                s.movement_type, 
+                s.movement_date
+            FROM stock_movements s
+            JOIN products p
+            ON s.product_id = p.product_id
+            WHERE stock_movement_id = ?;";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$stockMovementId]);
+        $stockMovementInfo = $stmt->fetch();
+        return $stockMovementInfo;
+    }
+    
+    function delete(int $stockMovementId, int $productId, string $movementType, int $movementQuantity)
+    {
+        try {
+            $this->db->beginTransaction();
+    
+            $deleteMovementQuery = "
+                DELETE FROM stock_movements
+                WHERE stock_movement_id = ?;
+            ";
+            $stmt1 = $this->db->prepare($deleteMovementQuery);
+            $stmt1->execute([$stockMovementId]);
+    
+            // Restore the quantity of the product in the products table
+            if (strcmp($movementType, 'IN') === 0) {
+                $updateProductQuery = "
+                    UPDATE products
+                    SET product_quantity = product_quantity - :movement_quantity
+                    WHERE product_id = :product_id;
+                ";
+            } else {
+                $updateProductQuery = "
+                    UPDATE products
+                    SET product_quantity = product_quantity + :movement_quantity
+                    WHERE product_id = :product_id;
+                ";
+            }
+            $stmt2 = $this->db->prepare($updateProductQuery);
+            $stmt2->execute([
+                ':product_id' => $productId,
+                ':movement_quantity' => $movementQuantity,
+            ]);
+    
+            $this->db->commit();
+        } catch (\Exception) {
+            $this->db->rollBack();
+            echo "<h1>Transaction failed!</h1>";
+            exit();
+        }
+    }
 }

@@ -45,12 +45,23 @@ class StockMovementController extends BaseController
 
     public function showInfo(): View 
     {
-        return View::make('stock-movements/index');
+        $stockMovementId = intval($_POST['stock_movement_id']);
+        $stockMovementInfo = $this->stockMovement->find($stockMovementId);
+        return View::make('stock-movements/info', ['stockMovementInfo' => $stockMovementInfo]);
     }
 
     public function remove() 
     {
-
+        $stockMovementToDeleteId = intval($_POST['delete_stock_movement_id']);
+        $stockMovementInfo = $this->stockMovement->find($stockMovementToDeleteId);
+        $this->stockMovement->delete(
+            $stockMovementInfo['stock_movement_id'],
+            $stockMovementInfo['product_id'],
+            $stockMovementInfo['movement_type'],
+            $stockMovementInfo['movement_quantity']                    
+        );
+        header('Location: /stock-movements');
+        exit();
     }
 
     public function edit(): View 

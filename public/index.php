@@ -50,7 +50,9 @@ $router->get('/', [HomeController::class, 'index'])
 
     ->get('/stock-movements', [StockMovementController::class, 'index'])
     ->get('/stock-movements/add', [StockMovementController::class, 'add'])
-    ->post('/stock-movements/add', [StockMovementController::class, 'store']);
+    ->post('/stock-movements/add', [StockMovementController::class, 'store'])
+    ->post('/stock-movements/info', [StockMovementController::class, 'showInfo'])
+    ->post('/stock-movements/delete', [StockMovementController::class, 'remove']);
 
 (new App(
     $router, 
