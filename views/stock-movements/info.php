@@ -15,7 +15,7 @@
             <li>Movement Quantity : <?= $stockMovementInfo['movement_quantity'] ?></li>
             <li>Movement Date : <?= $stockMovementInfo['movement_date'] ?></li>
         </ul>
-        <form action="/stock_movements/edit" method="post">
+        <form action="/stock-movements/edit" method="post">
             <input type="hidden" name="edit_stock_movement_id" value="<?= $stockMovementInfo['stock_movement_id'] ?>">
             <button type="submit">Edit</button>
         </form>

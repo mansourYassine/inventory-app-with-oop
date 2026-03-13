@@ -66,11 +66,28 @@ class StockMovementController extends BaseController
 
     public function edit(): View 
     {
-        return View::make('stock-movements/index');
+        $stockMovementToEditId = intval($_POST['edit_stock_movement_id']);
+        $stockMovementInfo = $this->stockMovement->find($stockMovementToEditId);
+        return View::make('stock-movements/edit', ['stockMovementInfo' => $stockMovementInfo, 'products' => $this->products]);
     }
 
     public function update() 
     {
-
+        $stockMovementId = intval($_POST['stock_movement_id']);
+        $productId = intval($_POST['product_id']);
+        $movementQuantity = intval($_POST['movement_quantity']);
+        $movementType = $_POST['movement_type'];
+        $movementDate = $_POST['movement_date'];
+        $stockMovementInfo = $this->stockMovement->find($stockMovementId);
+        $this->stockMovement->edit(
+            $stockMovementId, 
+            $productId,
+            $movementQuantity,
+            $movementType,
+            $movementDate,
+            $stockMovementInfo
+        );
+        header('Location: /stock-movements');
+        exit();
     }
 }
