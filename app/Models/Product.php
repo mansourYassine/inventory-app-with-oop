@@ -94,4 +94,53 @@ class Product extends Model
             'product_price' => $productPrice            
         ]);
     }
+
+    public function getTotalNumber()
+    {
+        $query = "
+            SELECT COUNT(*) AS total_products_number
+            FROM products
+            WHERE is_active = 'YES';
+        ";
+        $result = $this->db->query($query);
+        $totalProductsNumber = $result->fetch()['total_products_number'];
+        return $totalProductsNumber;
+    }
+
+    public function getTotalQuantity()
+    {
+        $query = "
+            SELECT SUM(product_quantity) AS total_products_quantity
+            FROM products
+            WHERE is_active = 'YES';
+        ";
+        $result = $this->db->query($query);
+        $totalProductsQuantity = $result->fetch()['total_products_quantity'];
+        return $totalProductsQuantity;
+    }
+
+    public function getTotalValue()
+    {
+        $query = "
+            SELECT SUM(product_quantity * product_price) AS total_products_value
+            FROM products
+            WHERE is_active = 'YES';
+        ";
+        $result = $this->db->query($query);
+        $totalProductsValue = $result->fetch()['total_products_value'];
+        return $totalProductsValue;
+    }
+
+    public function getLowStock()
+    {
+        $query = "
+            SELECT *
+            FROM products
+            WHERE product_quantity <= 5;
+        ";
+
+        $result = $this->db->query($query);
+        $lowStockProducts = $result->fetchAll();
+        return $lowStockProducts;
+    }
 }
