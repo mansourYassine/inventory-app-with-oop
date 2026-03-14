@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    <?php require VIEWS_PATH . 'includes\header.php' ?>
+    <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Edit Category page</h1>
     <form action="/categories/edit/save" method="post">
         <input type="hidden" name="category_id" value="<?= $categoryInfo['category_id'] ?>">

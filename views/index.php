@@ -6,6 +6,8 @@
         <title>Dashboard Page</title>
     </head>
     <body>
+        <?php require VIEWS_PATH . 'includes\header.php' ?>
+        <?php require VIEWS_PATH . 'includes\navbar.php' ?>
         <h1>Dashboard Page</h1>
         <ul>
             <li>Total number of products: <?= $totalProductsNumber ?></li>

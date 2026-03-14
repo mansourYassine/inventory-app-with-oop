@@ -6,6 +6,8 @@
         <title>Product Info</title>
     </head>
     <body>
+        <?php require VIEWS_PATH . 'includes\header.php' ?>
+        <?php require VIEWS_PATH . 'includes\navbar.php' ?>
         <h1>Product info Page</h1>
         <ul>
             <li>Product Name : <?= $productInfo['product_name'] ?></li>

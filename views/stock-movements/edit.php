@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    <?php require VIEWS_PATH . 'includes\header.php' ?>
+    <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Edit Stock Movement page</h1>
     <form action="/stock-movements/edit/save" method="post">
         <input type="hidden" name="stock_movement_id" value="<?= $stockMovementInfo['stock_movement_id'] ?>">

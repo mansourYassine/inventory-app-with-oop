@@ -6,6 +6,8 @@
     <title>Suppliers page</title>
 </head>
 <body>
+    <?php require VIEWS_PATH . 'includes\header.php' ?>
+    <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Suppliers Page</h1>
     <a href="/suppliers/add">Add New Supplier</a>
     <table border="1">

@@ -6,6 +6,8 @@
     <title>Categories</title>
 </head>
 <body>
+    <?php require VIEWS_PATH . 'includes\header.php' ?>
+    <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Categories Page</h1>
     <a href="/categories/add">Add New Category</a>
     <table border="1">

@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="\assets\css\all.min.css">
     </head>
     <body>
+        <?php require VIEWS_PATH . 'includes\header.php' ?>
+        <?php require VIEWS_PATH . 'includes\navbar.php' ?>
         <h1>Supplier info Page</h1>
         <ul>
             <li>Supplier Name : <?= $supplierInfo['supplier_name'] ?></li>

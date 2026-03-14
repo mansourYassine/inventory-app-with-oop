@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    <?php require VIEWS_PATH . 'includes\header.php' ?>
+    <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Add Supplier Page</h1>
 
     <form action="/suppliers/add" method="post">

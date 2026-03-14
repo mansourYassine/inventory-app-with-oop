@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="\assets\css\all.min.css">
     </head>
     <body>
+        <?php require VIEWS_PATH . 'includes\header.php' ?>
+        <?php require VIEWS_PATH . 'includes\navbar.php' ?>
         <h1>Stock Movement info Page</h1>
         <ul>
             <li>Product Name : <?= $stockMovementInfo['product_name'] ?></li>

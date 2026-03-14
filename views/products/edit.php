@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    <?php require VIEWS_PATH . 'includes\header.php' ?>
+    <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Edit product page</h1>
     <form action="/products/edit/save" method="post">
         <input type="hidden" name="product_id" value="<?= $productInfo['product_id'] ?>">

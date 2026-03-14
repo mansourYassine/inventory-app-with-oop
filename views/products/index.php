@@ -6,6 +6,8 @@
     <title>Products page</title>
 </head>
 <body>
+    <?php require VIEWS_PATH . 'includes\header.php' ?>
+    <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Products Page</h1>
     <a href="/products/add">Add New Product</a>
     <br>

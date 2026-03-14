@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    <?php require VIEWS_PATH . 'includes\header.php' ?>
+    <?php require VIEWS_PATH . 'includes\navbar.php' ?>
     <h1>Edit Supplier page</h1>
     <form action="/suppliers/edit/save" method="post">
         <input type="hidden" name="supplier_id" value="<?= $supplierInfo['supplier_id'] ?>">
